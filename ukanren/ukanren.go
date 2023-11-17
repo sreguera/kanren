@@ -4,8 +4,14 @@ func walk(u, s Term) Term {
 	if !u.IsVar() {
 		return u
 	} else {
+		r := findSubst(u, s)
+		if r.IsNil() {
+			return u
+		} else {
+			rr := r.(*Pair)
+			return walk(rr.Cdr, s)
+		}
 	}
-	return u
 }
 
 func findSubst(x, s Term) Term {
