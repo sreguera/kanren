@@ -57,3 +57,17 @@ func (t *Nil) Equal(o Term) bool {
 	_, ok := o.(*Nil)
 	return ok
 }
+
+func Cons(t1, t2 Term) Term {
+	return &Pair{t1, t2}
+}
+
+func List(terms ...Term) Term {
+	if terms == nil {
+		return &Nil{}
+	} else if len(terms) == 1 {
+		return Cons(terms[0], &Nil{})
+	} else {
+		return Cons(terms[0], List(terms[1:]...))
+	}
+}

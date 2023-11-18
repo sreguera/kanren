@@ -9,6 +9,6 @@ func main() {
 	var v uk.Term = &uk.Var{Name: "x"}
 	fmt.Println(v.IsPair())
 
-	var z uk.Term = &uk.Pair{Car: &uk.Var{Name: "x"}, Cdr: &uk.Var{Name: "y"}}
+	var z uk.Term = uk.Cons(&uk.Var{Name: "x"}, &uk.Var{Name: "y"})
 	fmt.Println(z.IsPair())
 }

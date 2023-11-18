@@ -19,13 +19,13 @@ func TestWalkNotFound(t *testing.T) {
 }
 
 func TestUnify(t *testing.T) {
-	var t1 Term = &Pair{&Var{"x"}, &Pair{&Str{"y"}, &Nil{}}}
-	var t2 Term = &Pair{&Str{"sx"}, &Var{"y"}}
+	var t1 Term = List(&Var{"x"}, &Str{"y"})
+	var t2 Term = Cons(&Str{"sx"}, &Var{"y"})
 	var s = unify(t1, t2, emptySubst())
 	if !s.find(&Var{"x"}).Equal(&Str{"sx"}) {
 		t.Fatal("can't find var x")
 	}
-	if !s.find(&Var{"y"}).Equal(&Pair{&Str{"y"}, &Nil{}}) {
+	if !s.find(&Var{"y"}).Equal(List(&Str{"y"})) {
 		t.Fatal("can't find var y")
 	}
 }
