@@ -11,3 +11,39 @@ func walk(u Term, s Subst) Term {
 	}
 	return walk(r, s)
 }
+
+func unify(u, v Term, s Subst) Subst {
+	uw := walk(u, s)
+	vw := walk(v, s)
+
+	uv, uIsVar := uw.(*Var)
+	vv, vIsVar := vw.(*Var)
+	if uIsVar && vIsVar && uw.Equal(vw) {
+		return s
+	} else if uIsVar {
+		return s.extend(uv, vw)
+	} else if vIsVar {
+		return s.extend(vv, uw)
+	}
+
+	up, uIsPair := uw.(*Pair)
+	vp, vIsPair := vw.(*Pair)
+	if uIsPair && vIsPair {
+		s1 := unify(up.Car, vp.Car, s)
+		if s1 == nil {
+			return nil
+		}
+		s2 := unify(up.Cdr, vp.Cdr, s1)
+		if s2 == nil {
+			return nil
+		}
+		return s2
+	}
+
+	if uw.Equal(vw) {
+		return s
+	} else {
+		return nil
+	}
+
+}

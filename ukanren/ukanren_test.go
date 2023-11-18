@@ -17,3 +17,15 @@ func TestWalkNotFound(t *testing.T) {
 		t.Fatal("could not find variable in walk")
 	}
 }
+
+func TestUnify(t *testing.T) {
+	var t1 Term = &Pair{&Var{"x"}, &Pair{&Str{"y"}, &Nil{}}}
+	var t2 Term = &Pair{&Str{"sx"}, &Var{"y"}}
+	var s = unify(t1, t2, emptySubst())
+	if !s.find(&Var{"x"}).Equal(&Str{"sx"}) {
+		t.Fatal("can't find var x")
+	}
+	if !s.find(&Var{"y"}).Equal(&Pair{&Str{"y"}, &Nil{}}) {
+		t.Fatal("can't find var y")
+	}
+}
