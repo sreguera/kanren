@@ -29,3 +29,12 @@ func TestUnify(t *testing.T) {
 		t.Fatal("can't find var y")
 	}
 }
+
+func TestCallFresh(t *testing.T) {
+	r := CallFresh(func(v *Var) func(*State) Stream {
+		return Equiv(v, &Str{"peich"})
+	})(EmptyState())
+	if !r.head().s.find(&Var{"0"}).Equal(&Str{"peich"}) {
+		t.Fatal("call fetch didn't work")
+	}
+}

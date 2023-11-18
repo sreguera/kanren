@@ -1,5 +1,7 @@
 package ukanren
 
+import "strconv"
+
 func walk(u Term, s Subst) Term {
 	v, isVar := u.(*Var)
 	if !isVar {
@@ -45,5 +47,21 @@ func unify(u, v Term, s Subst) Subst {
 	} else {
 		return nil
 	}
+}
 
+func Equiv(u, v Term) func(*State) Stream {
+	return func(s *State) Stream {
+		rs := unify(u, v, s.s)
+		if rs != nil {
+			return unit(&State{rs, s.i})
+		} else {
+			return mzero()
+		}
+	}
+}
+
+func CallFresh(f func(*Var) func(*State) Stream) func(*State) Stream {
+	return func(s *State) Stream {
+		return f(&Var{strconv.Itoa(s.i)})(&State{s.s, s.i + 1})
+	}
 }

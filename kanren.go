@@ -11,4 +11,9 @@ func main() {
 
 	var z uk.Term = uk.Cons(&uk.Var{Name: "x"}, &uk.Var{Name: "y"})
 	fmt.Println(z.IsPair())
+
+	r := uk.CallFresh(func(v *uk.Var) func(*uk.State) uk.Stream {
+		return uk.Equiv(v, &uk.Str{"peich"})
+	})(uk.EmptyState())
+	fmt.Println(r)
 }
