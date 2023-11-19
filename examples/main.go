@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	uk "sreguera/kanren/ukanren"
+
+	uk "github.com/sreguera/kanren/ukanren"
 )
 
 func main() {

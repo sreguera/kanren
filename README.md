@@ -11,5 +11,4 @@ See [the miniKanren page](http://minikanren.org/).
 * Interleaving streams
 * User level functionality (reify, run, ...)
 * Can streams be implemented with channels?
-* Correct package name in go.mod
 * Use reflect and Ifz data type to support Go types?
