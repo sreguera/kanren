@@ -14,5 +14,4 @@ See [the miniKanren page](http://minikanren.org/).
 * User level functionality (reify, run, ...)
 * Can streams be implemented with channels?
 * Correct package name in go.mod
-* Maybe remove IsVar, etc. and leave only Equal
 * Use reflect and Ifz data type to support Go types?
