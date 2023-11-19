@@ -66,13 +66,13 @@ func CallFresh(f func(*Var) Goal) Goal {
 	}
 }
 
-func disj(g1, g2 Goal) Goal {
+func Disj(g1, g2 Goal) Goal {
 	return func(s *State) Stream {
 		return g1(s).mplus(g2(s))
 	}
 }
 
-func conj(g1, g2 Goal) Goal {
+func Conj(g1, g2 Goal) Goal {
 	return func(s *State) Stream {
 		return g1(s).bind(g2)
 	}
