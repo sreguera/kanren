@@ -5,7 +5,7 @@ type Term interface {
 }
 
 type Var struct {
-	Name string
+	Id int
 }
 
 type Pair struct {
@@ -22,7 +22,7 @@ type Nil struct {
 
 func (t *Var) Equal(o Term) bool {
 	v, ok := o.(*Var)
-	return ok && t.Name == v.Name
+	return ok && t.Id == v.Id
 }
 
 func (t *Pair) Equal(o Term) bool {

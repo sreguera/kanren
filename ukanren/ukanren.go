@@ -1,7 +1,5 @@
 package ukanren
 
-import "strconv"
-
 func walk(u Term, s Subst) Term {
 	v, isVar := u.(*Var)
 	if !isVar {
@@ -62,7 +60,7 @@ func Equiv(u, v Term) Goal {
 
 func CallFresh(f func(*Var) Goal) Goal {
 	return func(s *State) Stream {
-		return f(&Var{strconv.Itoa(s.i)})(&State{s.s, s.i + 1})
+		return f(&Var{s.i})(&State{s.s, s.i + 1})
 	}
 }
 

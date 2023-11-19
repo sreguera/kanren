@@ -8,7 +8,6 @@ See [the miniKanren page](http://minikanren.org/).
 
 * Stringize everything (maybe unneeded with reify)
 * Num data type
-* Vars as numbers instead of strings
 * Infinite streams
 * Interleaving streams
 * User level functionality (reify, run, ...)
