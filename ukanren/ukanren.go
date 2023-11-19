@@ -49,7 +49,7 @@ func unify(u, v Term, s Subst) Subst {
 	}
 }
 
-func Equiv(u, v Term) func(*State) Stream {
+func Equiv(u, v Term) Goal {
 	return func(s *State) Stream {
 		rs := unify(u, v, s.s)
 		if rs != nil {
@@ -60,8 +60,20 @@ func Equiv(u, v Term) func(*State) Stream {
 	}
 }
 
-func CallFresh(f func(*Var) func(*State) Stream) func(*State) Stream {
+func CallFresh(f func(*Var) Goal) Goal {
 	return func(s *State) Stream {
 		return f(&Var{strconv.Itoa(s.i)})(&State{s.s, s.i + 1})
+	}
+}
+
+func disj(g1, g2 Goal) Goal {
+	return func(s *State) Stream {
+		return g1(s).mplus(g2(s))
+	}
+}
+
+func conj(g1, g2 Goal) Goal {
+	return func(s *State) Stream {
+		return g1(s).bind(g2)
 	}
 }

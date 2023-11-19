@@ -31,7 +31,7 @@ func TestUnify(t *testing.T) {
 }
 
 func TestCallFresh(t *testing.T) {
-	r := CallFresh(func(v *Var) func(*State) Stream {
+	r := CallFresh(func(v *Var) Goal {
 		return Equiv(v, &Str{"peich"})
 	})(EmptyState())
 	if !r.head().s.find(&Var{"0"}).Equal(&Str{"peich"}) {
