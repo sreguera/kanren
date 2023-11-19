@@ -32,9 +32,9 @@ func TestUnify(t *testing.T) {
 
 func TestCallFresh(t *testing.T) {
 	r := CallFresh(func(v *Var) Goal {
-		return Equiv(v, &Str{"peich"})
+		return Equiv(v, &Int{5})
 	})(EmptyState())
-	if !r.head().s.find(&Var{0}).Equal(&Str{"peich"}) {
-		t.Fatal("call fetch didn't work")
+	if !r.head().s.find(&Var{0}).Equal(&Int{5}) {
+		t.Fatal("call fresh didn't work")
 	}
 }

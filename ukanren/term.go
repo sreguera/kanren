@@ -17,6 +17,10 @@ type Str struct {
 	Value string
 }
 
+type Int struct {
+	Value int
+}
+
 type Nil struct {
 }
 
@@ -32,6 +36,11 @@ func (t *Pair) Equal(o Term) bool {
 
 func (t *Str) Equal(o Term) bool {
 	s, ok := o.(*Str)
+	return ok && t.Value == s.Value
+}
+
+func (t *Int) Equal(o Term) bool {
+	s, ok := o.(*Int)
 	return ok && t.Value == s.Value
 }
 

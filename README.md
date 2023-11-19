@@ -7,7 +7,6 @@ See [the miniKanren page](http://minikanren.org/).
 ## TODO
 
 * Stringize everything (maybe unneeded with reify)
-* Num data type
 * Infinite streams
 * Interleaving streams
 * User level functionality (reify, run, ...)
