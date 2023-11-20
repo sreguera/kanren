@@ -6,9 +6,10 @@ See [the miniKanren page](http://minikanren.org/).
 
 ## TODO
 
-* Stringize everything (maybe unneeded with reify)
-* Infinite streams
+* Stringize pairs as lists, maybe
+* Infinite streams. next as interface{} and then type dispatch?
 * Interleaving streams
 * User level functionality (reify, run, ...)
 * Can streams be implemented with channels?
 * Use reflect and Ifz data type to support Go types?
+* Comment functions and data types

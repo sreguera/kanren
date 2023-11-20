@@ -12,6 +12,7 @@ func main() {
 	r1 := uk.CallFresh(func(v *uk.Var) uk.Goal {
 		return uk.Equiv(v, &uk.Int{5})
 	})(uk.EmptyState())
+	fmt.Println("\nFirst example result:")
 	fmt.Println(r1)
 
 	// Paper, section 2, second example
@@ -25,5 +26,8 @@ func main() {
 	)
 
 	r2 := a_and_b(uk.EmptyState())
+	fmt.Println("\nSecond example result:")
 	fmt.Println(r2)
+
+	fmt.Println()
 }

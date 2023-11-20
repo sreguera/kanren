@@ -1,8 +1,17 @@
 package ukanren
 
+import (
+	"fmt"
+	"strings"
+)
+
 type State struct {
 	s Subst
 	i int
+}
+
+func (s *State) String() string {
+	return fmt.Sprintf("{%v, %d}", s.s, s.i)
 }
 
 func EmptyState() *State {
@@ -21,6 +30,14 @@ type Goal func(*State) Stream
 type stream struct {
 	v    *State
 	next Stream
+}
+
+func (s *stream) String() string {
+	items := []string{}
+	for it := s; it != nil; it = it.next.(*stream) {
+		items = append(items, fmt.Sprintf("%v", it.v))
+	}
+	return "<" + strings.Join(items, ",\n ") + ">"
 }
 
 func (s *stream) head() *State {

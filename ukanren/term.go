@@ -1,5 +1,7 @@
 package ukanren
 
+import "fmt"
+
 type Term interface {
 	Equal(o Term) bool
 }
@@ -47,6 +49,26 @@ func (t *Int) Equal(o Term) bool {
 func (t *Nil) Equal(o Term) bool {
 	_, ok := o.(*Nil)
 	return ok
+}
+
+func (t *Var) String() string {
+	return fmt.Sprintf("v.%d", t.Id)
+}
+
+func (t *Pair) String() string {
+	return fmt.Sprintf("p.(%v, %v)", t.Car, t.Cdr)
+}
+
+func (t *Str) String() string {
+	return fmt.Sprintf("s.%s", t.Value)
+}
+
+func (t *Int) String() string {
+	return fmt.Sprintf("i.%d", t.Value)
+}
+
+func (t *Nil) String() string {
+	return "nil"
 }
 
 func Cons(t1, t2 Term) Term {
