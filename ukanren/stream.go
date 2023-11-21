@@ -34,8 +34,13 @@ type stream struct {
 
 func (s *stream) String() string {
 	items := []string{}
-	for it := s; it != nil; it = it.next.(*stream) {
+	for it := s; it != nil; {
 		items = append(items, fmt.Sprintf("%v", it.v))
+		it1, ok := it.next.(*stream)
+		if !ok {
+			items = append(items, "...")
+		}
+		it = it1
 	}
 	return "<" + strings.Join(items, ",\n ") + ">"
 }
@@ -70,4 +75,38 @@ func unit(state *State) *stream {
 
 func mzero() *stream {
 	return nil
+}
+
+type ztream struct {
+	f func() Stream
+}
+
+func Zzz(g func() Stream) Stream {
+	return &ztream{g}
+}
+
+func (s *ztream) head() *State {
+	panic(nil)
+}
+
+func (s *ztream) tail() Stream {
+	panic(nil)
+}
+
+func (s *ztream) mplus(t Stream) Stream {
+	x := func() Stream {
+		return s.f().mplus(t)
+	}
+	return &ztream{x}
+}
+
+func (s *ztream) bind(g Goal) Stream {
+	x := func() Stream {
+		return s.f().bind(g)
+	}
+	return &ztream{x}
+}
+
+func (s *ztream) String() string {
+	return "..."
 }
